@@ -1,8 +1,6 @@
 package Com.MedicalAgency.Entity;
 
-import org.hibernate.usertype.UserType;
-
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "usuarios")
@@ -23,14 +21,29 @@ public class User {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private UserType tipo; // MEDICO, PACIENTE, ADMINISTRADOR
+    private String userGender;
+
+    // Novo atributo para armazenar o código aleatório
+    @Transient  // Não será persistido no banco de dados
+    private int randomcode;
+
+    // Construtor que gera o código aleatório
+    public User() {
+        this.randomcode = newRandomCode();
+    }
+
+    private int newRandomCode() {
+        return (int) (Math.random() * 10000);
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    // Getters e Setters
 
     public String getSenha() {
         return senha;
-    }
-
-    public UserType getTipo() {
-        return tipo;
     }
 
     public String getEmail() {
@@ -48,4 +61,15 @@ public class User {
     public void setId(Long id) {
         this.id = id;
     }
+
+    // Getter para o código aleatório
+    public int getRandomcode() {
+        return randomcode;
+    }
+
+    // Setter opcional caso precise modificar o código aleatório
+    public void setRandomcode(int randomcode) {
+        this.randomcode = randomcode;
+    }
 }
+

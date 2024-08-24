@@ -21,8 +21,8 @@ public class UserController {
         return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
     }
 
-    @GetMapping
-    public ResponseEntity<List<User>> getUsers() {
-        return ResponseEntity.ok(userService.getAllUsers());
-    }
+//    @GetMapping
+//    public ResponseEntity<List<User>> getUsers() {
+//        return ResponseEntity.ok(userService.getAllUsers());
+//    }
 }
